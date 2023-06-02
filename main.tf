@@ -55,7 +55,7 @@ resource "google_compute_instance" "default" {
   boot_disk {
     initialize_params {
       image = "rhel-cloud/rhel-8"
-      size ="${var.boot_size}"
+      size ="20"
     }
   }
 
