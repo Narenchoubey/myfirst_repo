@@ -40,9 +40,9 @@ jobs:
       run: terraform init
 
     - name: Terraform Plan
-      run: terraform plan
+      run: terraform plan -out=tfplan
 
     - name: Terraform Apply
-      run: terraform apply
+      run: terraform apply tfplan
       env:
         TF_VAR_project_id: ninth-beacon-388117
