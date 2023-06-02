@@ -20,20 +20,20 @@ variable "google_cred" {
 ## NETWORK and FIREWALL
 ##########################################################################################
 
-resource "google_compute_network" "network" {
-  name    = "test-dev-vpc"
-  project = "ninth-beacon-388117"
-#  network_tier   =  "STANDARD"
-  auto_create_subnetworks = false
-}
-
-resource "google_compute_subnetwork" "subnet" {
-  name          = "app-sub1"
-  project       = "ninth-beacon-388117"
-  region        = "us-central1"
-  network       = google_compute_network.network.id
-  ip_cidr_range = "10.1.0.0/27"
-}
+#resource "google_compute_network" "network" {
+#  name    = "test-dev-vpc"
+#  project = "ninth-beacon-388117"
+##  network_tier   =  "STANDARD"
+#  auto_create_subnetworks = false
+#}
+#
+#resource "google_compute_subnetwork" "subnet" {
+#  name          = "app-sub1"
+#  project       = "ninth-beacon-388117"
+#  region        = "us-central1"
+#  network       = google_compute_network.network.id
+#  ip_cidr_range = "10.1.0.0/27"
+#}
 
 resource "google_compute_address" "static-ip-address" {
   name   = "gke-ip"
@@ -65,7 +65,7 @@ resource "google_compute_instance" "default" {
   }
 
   network_interface {
-    subnetwork = "app-sub1"
+    network = "default"
     access_config {
       nat_ip = "${google_compute_address.static-ip-address.address}"
     }
