@@ -27,12 +27,12 @@ jobs:
 
     - name: Export secret
       env:
-        GOOGLE_CRED: ${{ secrets.TF_VAR_my_google_cred }}
-        SSH_PUBLIC_KEY: ${{ secrets.TF_VAR_my_my_secret_pub }}
+        GOOGLE_CRED: ${{ secrets.TF_VAR_google_cred }}
+        SSH_PUBLIC_KEY: ${{ secrets.TF_VAR_my_secret_pub }}
         SSH_PVT_KEY: ${{ secrets.TF_VAR_my_secret_pvt }}
       run: |
           #echo "TF_VAR_my_secret=$MY_SECRET" >> $GITHUB_ENV
-          echo "TF_VAR_my_google_cred=$GOOGLE_CRED" >> $GITHUB_ENV
+          echo "TF_VAR_google_cred=$GOOGLE_CRED" >> $GITHUB_ENV
           echo "TF_VAR_my_secret_pub=$SSH_PUBLIC_KEY" >> $GITHUB_ENV
           echo "TF_VAR_my_secret_pvt=$SSH_PVT_KEY" >> $GITHUB_ENV
 
