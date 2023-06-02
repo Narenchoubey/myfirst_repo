@@ -6,15 +6,15 @@ provider "google" {
 }
 ###############################################################
 variable "my_secret_pub" {
-  description = "My secret value"
+  description = "My pub secret value"
 }
 
 variable "my_secret_pvt" {
-  description = "My secret value"
+  description = "My pvt secret value"
 }
 
 variable "google_cred" {
-  description = "My secret value"
+  description = "My google value"
 }
 ##########################################################################################
 ## NETWORK and FIREWALL
@@ -81,7 +81,7 @@ resource "google_compute_instance" "default" {
         host = "${google_compute_address.static-ip-address.address}"
 #        host = "${google_compute_address.static-ip-address[count.index].address}"
         #private_key = "${file("./gcp.pem")}"
-		private_key = "${var.my_secret_pub}"
+	private_key = "${var.my_secret_pvt}"
     }
     inline=[
       "sleep 5",
@@ -93,7 +93,7 @@ resource "google_compute_instance" "default" {
   }
 
   metadata = {
-    ssh-keys = "gcp:${var.my_secret_pvt}"
+    ssh-keys = "gcp:${var.my_secret_pub}"
 	#ssh-keys = "gcp:${file("./gcp.pub")}"
   }
 
