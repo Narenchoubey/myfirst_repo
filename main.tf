@@ -1,6 +1,6 @@
 provider "google" {
-  #credentials = file("./ninth-beacon-388117-d7f8eeedc1e1.json")
-  credentials = "${var.google_cred}"
+  credentials = file("./ninth-beacon-388117-d7f8eeedc1e1.json")
+  #credentials = "${var.google_cred}"
   project     = "ninth-beacon-388117"
   region      = "us-central1"
 }
