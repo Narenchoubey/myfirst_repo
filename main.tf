@@ -17,7 +17,7 @@ variable "google_cred" {
   description = "My google cred value"
 }
 ##########################################################################################
-## NETWORK and FIREWALL
+### NETWORK and FIREWALL
 ##########################################################################################
 
 #resource "google_compute_network" "network" {
