@@ -66,7 +66,6 @@ resource "google_compute_instance" "default" {
 
   network_interface {
     subnetwork = "app-sub1"
-
     access_config {
       nat_ip = "${google_compute_address.static-ip-address.address}"
     }
