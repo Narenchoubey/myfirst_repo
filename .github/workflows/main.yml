@@ -22,8 +22,7 @@ jobs:
       uses: google-github-actions/setup-gcloud@v0
       with:
         project_id: ninth-beacon-388117
-        service_account_key: "./ninth-beacon-388117-d7f8eeedc1e1.json"
-        #service_account_key: ${{ secrets.GOOGLE_CRED }}
+        service_account_key: ${{ secrets.GOOGLE_CRED }}
         export_default_credentials: true
 
 
