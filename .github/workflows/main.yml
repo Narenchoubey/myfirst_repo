@@ -1,4 +1,4 @@
-test12345name: Terraform Deployment
+name: Terraform Deployment
 on:
   push:
     branches:
@@ -36,3 +36,12 @@ jobs:
       run: terraform apply tfplan
       env:
         TF_VAR_project_id: ninth-beacon-388117
+        
+    - name: Install Ansible
+      run: |
+          sudo yum update -y
+          sudo subscription-manager repos --enable ansible-2-for-rhel-8-x86_64-rpms
+          sudo yum install ansible -y
+
+    - name: Execute Ansible playbook
+      run: ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini ./Ansible/install_java.yml -u gcp --private-key ${{ secrets.SSH_PVT_KEY }}"
