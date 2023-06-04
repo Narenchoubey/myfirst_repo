@@ -65,8 +65,8 @@ resource "google_compute_instance" "default" {
 	private_key = "${var.my_secret_pvt}"
     }
     inline=[
-      "sleep 5",
-      "sudo yum update -y"
+      "sleep 5"
+      #"sudo yum update -y"
       ]
   }
 
