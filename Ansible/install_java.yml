@@ -6,13 +6,17 @@
 
   tasks:
 
-
-    - name: Download some content
-      gc_storage:
+    - name: Download files from GCP Storage
+      google.cloud.gcp_storage_object:
         bucket: testdownload12345
-        object: jre-8u371-linux-x64.rpm 
-        dest: /tmp/jre-8u371-linux-x64.rpm 
+        object: jre-8u371-linux-x64.rpm
+        dest: /tmp/jre-8u371-linux-x64.rpm
         mode: get
+      register: download_result
+      
+    - name: Check the download status
+      debug:
+        msg: "Download status: {{ download_result }}"
  
 
     - name: Copy file to remote server
