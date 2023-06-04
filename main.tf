@@ -13,9 +13,9 @@ variable "my_secret_pvt" {
   description = "My pvt secret value"
 }
 
-variable "google_cred" {
-  description = "My google cred value"
-}
+#variable "google_cred" {
+  #description = "My google cred value"
+#}
 ##########################################################################################
 ### NETWORK and FIREWALL
 ##########################################################################################
