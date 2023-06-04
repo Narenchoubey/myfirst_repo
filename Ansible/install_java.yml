@@ -1,6 +1,6 @@
 ---
 - name: Install Falcon-sensor and Nessus agent
-  hosts: ALL
+  hosts: all
   become: true
   
 
