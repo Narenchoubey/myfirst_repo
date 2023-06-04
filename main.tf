@@ -95,12 +95,8 @@ resource "google_compute_instance" "default" {
     ssh-keys = "gcp:${var.my_secret_pub}"
 	#ssh-keys = "gcp:${file("./gcp.pub")}"
   }
-
   metadata_startup_script = "echo hi > /test.txt"
-
 }
-
-
 
 resource "local_file" "inventory" {
   content = <<-EOT
@@ -108,6 +104,14 @@ resource "local_file" "inventory" {
   EOT
 
   filename = "inventory.ini"
+}
+
+resource "null_resource" "ansible_provisioner" {
+  provisioner "local-exec" {
+    command = <<-EOT
+      ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini ./Ansible/install_java.yml -u gcp --private-key="${var.my_secret_pvt}" -vvv
+    EOT
+  }
 }
 
 #resource "null_resource" "change_permission" {
