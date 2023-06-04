@@ -7,13 +7,12 @@
   tasks:
 
 
-
-    - name: Download JAVA file with check
-      ansible.builtin.get_url:
-        url: https://storage.cloud.google.com/terraform-statefile-1/jre-8u371-linux-x64.rpm
-        dest: /tmp/jre-8u371-linux-x64.rpm
-        mode: 0755
-        #checksum: md5:52EAD81E56174C408A7F4B2DE667D5D3­5F
+    - name: Download some content
+      gc_storage:
+        bucket: testdownload12345
+        object: jre-8u371-linux-x64.rpm 
+        dest: /tmp/jre-8u371-linux-x64.rpm 
+        mode: get
  
 
     - name: Install JAVA
