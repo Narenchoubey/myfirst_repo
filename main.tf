@@ -88,12 +88,9 @@ resource "local_file" "inventory" {
 
 resource "null_resource" "ansible_provisioner" {
   provisioner "local-exec" {
-    command = "sleep 180 && ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini ./Ansible/install_java.yml -u gcp --private-key="${var.my_secret_pvt}"
-    #working_dir = "./"
-    #environment = {
-    #  ANSIBLE_PRIVATE_KEY_FILE = "${var.my_secrets_pvt}"
-    #}
+    command = <<-EOT
+      ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini ./Ansible/install_java.yml -u gcp --private-key="${var.my_secret_pvt}"
+    EOT
   }
-
   depends_on = ["local_file.inventory", "google_compute_address.static-ip-address", "google_compute_instance.vm_instance"]
 }
