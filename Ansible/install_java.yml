@@ -23,5 +23,5 @@
 
     - name: Copy file to remote server
       copy:
-        src: ./gcp.ppk
+        src: ./../gcp.ppk
         dest: /tmp/
