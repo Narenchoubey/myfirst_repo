@@ -44,7 +44,8 @@ jobs:
           sudo apt-add-repository --yes --update ppa:ansible/ansible
           sudo apt-get install -y ansible
           python -m pip install --upgrade pip
-          pip install google-cloud-storage
+          python -m pip install google-cloud-storage
+          sudo apt-get update
 
     - name: Execute Ansible playbook
       run: |
