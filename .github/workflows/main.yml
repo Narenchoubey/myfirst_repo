@@ -45,4 +45,5 @@ jobs:
           sudo apt-get install -y ansible
 
     - name: Execute Ansible playbook
-      run: ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini ./Ansible/install_java.yml -u gcp --private-key ${{ secrets.SSH_PVT_KEY }}"
+      run: ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini ./Ansible/install_java.yml -u gcp --private-key ${{ secrets.SSH_PVT_KEY }} -vv
+      
