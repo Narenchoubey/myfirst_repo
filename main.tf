@@ -109,7 +109,7 @@ resource "local_file" "inventory" {
 resource "null_resource" "ansible_provisioner" {
   provisioner "local-exec" {
     command = <<-EOT
-      ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini ./Ansible/install_java.yml -u gcp --private-key="${var.my_secret_pvt}" -vvv
+      ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini ./Ansible/install_java.yml -u gcp --private-key="${var.my_secret_pvt}"
     EOT
   }
 }
