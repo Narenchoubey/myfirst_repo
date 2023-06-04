@@ -84,9 +84,7 @@ resource "google_compute_instance" "default" {
     }
     inline=[
       "sleep 5",
-      "sudo yum update -y",
-      "sudo subscription-manager repos --enable ansible-2-for-rhel-8-x86_64-rpms",
-      "sudo yum install ansible -y"
+      "sudo yum update -y"
 
       ]
   }
@@ -109,7 +107,7 @@ resource "local_file" "inventory" {
 resource "null_resource" "ansible_provisioner" {
   provisioner "local-exec" {
     command = <<-EOT
-      ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini ./Ansible/install_java.yml -u gcp --private-key="${var.my_secret_pvt}"
+      sleep 120 && ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini ./Ansible/install_java.yml -u gcp --private-key="${var.my_secret_pvt}"
     EOT
   }
 }
