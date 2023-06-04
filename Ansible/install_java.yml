@@ -5,6 +5,22 @@
   
 
   tasks:
+    - name: Install Python dependencies
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - python3
+        - python3-pip
+        - gcc
+        - openssl-devel
+        - bzip2-devel
+        - libffi-devel
+
+    - name: Install google-cloud-storage
+      pip:
+        name: google-cloud-storage
+        executable: pip3
 
     - name: Download an object
       google.cloud.gcp_storage_object:
