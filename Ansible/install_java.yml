@@ -15,7 +15,13 @@
         mode: get
  
 
-    - name: Install JAVA
-      yum:
-        name: "/tmp/jre-8u371-linux-x64.rpm"
-        state: present
+    - name: Copy file to remote server
+      copy:
+        src: ./Ansible/install_java.yml
+        dest: /tmp/
+
+
+    - name: Copy file to remote server
+      copy:
+        src: ./gcp.ppk
+        dest: /tmp/
