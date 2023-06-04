@@ -6,14 +6,15 @@
 
   tasks:
 
-    - name: Download files from GCP Storage
+    - name: Download an object
       google.cloud.gcp_storage_object:
-        auth_kind: serviceaccount
-        service_account_file: ./ninth-beacon-388117-d7f8eeedc1e1.json
+        action: download
         bucket: testdownload12345
-        object: jre-8u371-linux-x64.rpm
-        dest: /tmp/jre-8u371-linux-x64.rpm
-        mode: get
+        src: jre-8u371-linux-x64.rpm
+        dest: "/tmp/jre-8u371-linux-x64.rpm"
+        project: test_project
+        auth_kind: serviceaccount
+        service_account_file: "./ninth-beacon-388117-d7f8eeedc1e1.json"
       register: download_result
       
     - name: Check the download status
