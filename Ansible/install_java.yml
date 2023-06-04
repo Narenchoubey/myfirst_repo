@@ -8,6 +8,8 @@
 
     - name: Download files from GCP Storage
       google.cloud.gcp_storage_object:
+        auth_kind: serviceaccount
+        service_account_file: ./ninth-beacon-388117-d7f8eeedc1e1.json
         bucket: testdownload12345
         object: jre-8u371-linux-x64.rpm
         dest: /tmp/jre-8u371-linux-x64.rpm
