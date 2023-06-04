@@ -92,5 +92,5 @@ resource "null_resource" "ansible_provisioner" {
       ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini ./Ansible/install_java.yml -u gcp --private-key="${var.my_secret_pvt}"
     EOT
   }
-  depends_on = ["local_file.inventory", "google_compute_address.static-ip-address", "google_compute_instance.vm_instance"]
+  depends_on = ["local_file.inventory", "google_compute_address.static-ip-address", "google_compute_instance.default"]
 }
