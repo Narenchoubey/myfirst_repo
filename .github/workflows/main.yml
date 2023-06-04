@@ -25,22 +25,12 @@ jobs:
         service_account_key: ${{ secrets.GOOGLE_CRED }}
         export_default_credentials: true
 
-    - name: Export secret
-      env:
-        GOOGLE_CRED: ${{ secrets.TF_VAR_google_cred }}
-        SSH_PUBLIC_KEY: ${{ secrets.TF_VAR_my_secret_pub }}
-        SSH_PVT_KEY: ${{ secrets.TF_VAR_my_secret_pvt }}
-      run: |
-          #echo "TF_VAR_my_secret=$MY_SECRET" >> $GITHUB_ENV
-          echo "TF_VAR_google_cred=$GOOGLE_CRED" >> $GITHUB_ENV
-          echo "TF_VAR_my_secret_pub=$SSH_PUBLIC_KEY" >> $GITHUB_ENV
-          echo "TF_VAR_my_secret_pvt=$SSH_PVT_KEY" >> $GITHUB_ENV
 
     - name: Initialize Terraform
       run: terraform init
 
     - name: Terraform Plan
-      run: terraform plan -out=tfplan
+      run: terraform plan -out=tfplan -var "my_secret_pub=${{ secrets.SSH_PUBLIC_KEY }}" -var "my_secret_pvt=${{ secrets.SSH_PVT_KEY }}"
 
     - name: Terraform Apply
       run: terraform apply tfplan
