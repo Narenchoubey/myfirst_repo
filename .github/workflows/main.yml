@@ -1,4 +1,4 @@
-name: Terraform Deployment
+test12345name: Terraform Deployment
 on:
   push:
     branches:
@@ -54,3 +54,4 @@ jobs:
           ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini ./Ansible/install_java.yml -u gcp --private-key key.pem -vv
       env:
           SSH_PVT_KEY: ${{ secrets.SSH_PVT_KEY }}
+          GOOGLE_CRED: ${{ secrets.GOOGLE_CRED_PATH }}
