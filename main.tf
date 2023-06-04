@@ -14,26 +14,10 @@ variable "my_secret_pvt" {
 }
 
 #variable "google_cred" {
-  #description = "My google cred value"
+#  description = "My google cred value"
 #}
-##########################################################################################
-### NETWORK and FIREWALL
 ##########################################################################################
 
-#resource "google_compute_network" "network" {
-#  name    = "test-dev-vpc"
-#  project = "ninth-beacon-388117"
-##  network_tier   =  "STANDARD"
-#  auto_create_subnetworks = false
-#}
-#
-#resource "google_compute_subnetwork" "subnet" {
-#  name          = "app-sub1"
-#  project       = "ninth-beacon-388117"
-#  region        = "us-central1"
-#  network       = google_compute_network.network.id
-#  ip_cidr_range = "10.1.0.0/27"
-#}
 
 resource "google_compute_address" "static-ip-address" {
   name   = "gke-ip"
@@ -41,8 +25,6 @@ resource "google_compute_address" "static-ip-address" {
   #network_tier = "STANDARD"
 }
 
-
-#terraform import google_compute_network.network manh-cloud-services-sandbox/test-dev-vpc
 
 resource "google_compute_instance" "default" {
   count         = 1
@@ -80,7 +62,7 @@ resource "google_compute_instance" "default" {
         host = "${google_compute_address.static-ip-address.address}"
 #        host = "${google_compute_address.static-ip-address[count.index].address}"
         #private_key = "${file("./gcp.pem")}"
-	private_key = "${var.my_secret_pvt}"
+	    private_key = "${var.my_secret_pvt}"
     }
     inline=[
       "sleep 5",
@@ -95,6 +77,7 @@ resource "google_compute_instance" "default" {
   }
   metadata_startup_script = "echo hi > /test.txt"
 }
+
 
 resource "local_file" "inventory" {
   content = <<-EOT
