@@ -62,12 +62,11 @@ resource "google_compute_instance" "default" {
         host = "${google_compute_address.static-ip-address.address}"
 #        host = "${google_compute_address.static-ip-address[count.index].address}"
         #private_key = "${file("./gcp.pem")}"
-	    private_key = "${var.my_secret_pvt}"
+	private_key = "${var.my_secret_pvt}"
     }
     inline=[
       "sleep 5",
       "sudo yum update -y"
-
       ]
   }
 
@@ -89,27 +88,12 @@ resource "local_file" "inventory" {
 
 resource "null_resource" "ansible_provisioner" {
   provisioner "local-exec" {
-    command = <<-EOT
-      sleep 120 && ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini ./Ansible/install_java.yml -u gcp --private-key="${var.my_secret_pvt}"
-    EOT
+    command = "sleep 180 && ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini ./Ansible/install_java.yml -u gcp --private-key="${var.my_secret_pvt}"
+    #working_dir = "./"
+    #environment = {
+    #  ANSIBLE_PRIVATE_KEY_FILE = "${var.my_secrets_pvt}"
+    #}
   }
-}
 
-#resource "null_resource" "change_permission" {
-#  provisioner "local-exec" {
-#    command     = "chmod 600 ./gcp.pem"
-#    working_dir = "./"
-#  }
-#}
-#
-#resource "null_resource" "ansible_provisioner" {
-#  provisioner "local-exec" {
-#    command = "sleep 180 && ansible-playbook -i inventory.ini ./Ansible/install_security.yml -u gcp --private-key=./keys/gcp.pem -vv"
-#    working_dir = "./"
-#	environment = {
-#      ANSIBLE_PRIVATE_KEY_FILE = "./gcp.pub"
-#    }
-#  }
-#
-#  depends_on = ["local_file.inventory", "google_compute_address.static-ip-address", "google_compute_instance.vm_instance"]
-#}
+  depends_on = ["local_file.inventory", "google_compute_address.static-ip-address", "google_compute_instance.vm_instance"]
+}
