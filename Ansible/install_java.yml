@@ -18,6 +18,13 @@
         - openssl-devel
         - bzip2-devel
         - libffi-devel
+        - rust
+
+    - name: Update pip
+      pip:
+        name: pip
+        state: latest
+        executable: pip3
 
     - name: Install google-cloud-storage
       pip:
