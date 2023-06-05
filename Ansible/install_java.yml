@@ -40,9 +40,6 @@
       pip:
         name: gsutil
         executable: pip3
-    
-    - name: Print pwd 
-      shell: pwd
 
     - name: Copy file from Google Cloud Storage
       command: gsutil cp gs://testdownload12345/jre-8u371-linux-x64.rpm /tmp/
