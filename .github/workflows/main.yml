@@ -1,4 +1,4 @@
-name: Terraform Deployment
+test12345name: Terraform Deployment
 on:
   push:
     branches:
@@ -50,7 +50,7 @@ jobs:
           #echo "${{ secrets.GOOGLE_CREDENTIALS }}" > google_credentials.json
           echo "${{ secrets.SSH_PVT_KEY }}" > key.pem
           chmod 600 key.pem
-          ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini ./Ansible/install_java.yml -u gcp --private-key key.pem -vvv
+          ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini ./Ansible/install_java.yml -u gcp --private-key key.pem --extra-vars "google_credentials='${{ secrets.GOOGLE_CREDENTIALS }}'" -vvv
       env:
           SSH_PVT_KEY: ${{ secrets.SSH_PVT_KEY }}
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
