@@ -30,8 +30,8 @@
         dest: "/tmp/jre-8u371-linux-x64.rpm"
         project: test_project
         auth_kind: serviceaccount
-        ##service_account_file: "./ninth-beacon-388117-d7f8eeedc1e1.json"
-        service_account_file: "{{ lookup('env', 'GOOGLE_CREDENTIALS') }}"
+        service_account_file: "/home/runner/work/myfirst_repo/myfirst_repo/ninth-beacon-388117-d7f8eeedc1e1.json"
+        ##service_account_file: "{{ lookup('env', 'GOOGLE_CREDENTIALS') }}"
       register: download_result
       
     - name: Check the download status
