@@ -1,4 +1,4 @@
-name: Terraform Deployment
+test1234509name: Terraform Deployment
 on:
   push:
     branches:
@@ -43,9 +43,10 @@ jobs:
           sudo apt-get install -y software-properties-common
           sudo apt-add-repository --yes --update ppa:ansible/ansible
           sudo apt-get install -y ansible
-          python -m pip install --upgrade pip
-          python -m pip install google-cloud-storage
-          sudo apt-get update
+          
+    - name: Set secrets as environment variables
+      env:
+         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
     - name: Execute Ansible playbook
       run: |
