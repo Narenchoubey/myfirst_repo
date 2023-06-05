@@ -24,8 +24,7 @@
         name: google-cloud-storage
         executable: pip3
     
-     - name: Install gsutil via pip
-      become: true
+    - name: Install gsutil via pip
       pip:
         name: gsutil
         executable: pip3
