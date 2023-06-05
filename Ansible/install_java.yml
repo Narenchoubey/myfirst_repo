@@ -45,7 +45,7 @@
         dest: "/tmp/jre-8u371-linux-x64.rpm"
         project: test_project
         auth_kind: serviceaccount
-        service_account_file: {{ GOOGLE_CREDENTIALS }}
+        service_account_file: "{{ GOOGLE_CREDENTIALS }}"
         ##service_account_file: "{{ lookup('env', 'GOOGLE_CREDENTIALS') }}"
       register: download_result
       
