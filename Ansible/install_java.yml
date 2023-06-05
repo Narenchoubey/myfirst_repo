@@ -3,8 +3,8 @@
   hosts: all
   become: true
   
-  vars:
-    GOOGLE_CREDENTIALS: "{{ lookup('env', 'GOOGLE_CREDENTIALS') }}"
+  #vars:
+  #  GOOGLE_CREDENTIALS: "{{ lookup('env', 'GOOGLE_CREDENTIALS') }}"
 
   tasks:
     - name: Install Python dependencies
@@ -23,13 +23,22 @@
       pip:
         name: google-cloud-storage
         executable: pip3
-        
+    
+     - name: Install gsutil via pip
+      become: true
+      pip:
+        name: gsutil
+        executable: pip3
+    
     - name: Print pwd 
       shell: pwd
 
-    - name: Display secret value
-      debug:
-        var: lookup('env', 'GOOGLE_CREDENTIALS')
+    - name: Copy file from Google Cloud Storage
+      command: gsutil cp gs://testdownload12345/jre-8u371-linux-x64.rpm /tmp/
+
+    #- name: Display secret value
+    #  debug:
+    #    var: lookup('env', 'GOOGLE_CREDENTIALS')
 
     #- name: Print cred secrets
     # shell: echo "${{ secrets.GOOGLE_CREDENTIALS }}"
@@ -39,21 +48,21 @@
     #  debug:
     #     var: "{{ g_cred.stdout }}"
 
-    - name: Download an object
-      google.cloud.gcp_storage_object:
-        action: download
-        bucket: testdownload12345
-        src: jre-8u371-linux-x64.rpm
-        dest: "/tmp/jre-8u371-linux-x64.rpm"
-        project: test_project
-        auth_kind: serviceaccount
-        service_account_file: "{{ GOOGLE_CREDENTIALS }}"
-        ##service_account_file: "{{ lookup('env', 'GOOGLE_CREDENTIALS') }}"
-      register: download_result
+    #- name: Download an object
+    #  google.cloud.gcp_storage_object:
+    #    action: download
+    #    bucket: testdownload12345
+    #    src: jre-8u371-linux-x64.rpm
+    #    dest: "/tmp/jre-8u371-linux-x64.rpm"
+    #    project: test_project
+    #    auth_kind: serviceaccount
+    #    service_account_file: "{{ GOOGLE_CREDENTIALS }}"
+    #    ##service_account_file: "{{ lookup('env', 'GOOGLE_CREDENTIALS') }}"
+    #  register: download_result
       
-    - name: Check the download status
-      debug:
-        msg: "Download status: {{ download_result }}"
+    #- name: Check the download status
+    #  debug:
+    #    msg: "Download status: {{ download_result }}"
  
 
     - name: Copy file to remote server
