@@ -1,4 +1,4 @@
-test1234509name: Terraform Deployment
+name: Terraform Deployment
 on:
   push:
     branches:
