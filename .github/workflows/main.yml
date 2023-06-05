@@ -44,9 +44,6 @@ jobs:
           sudo apt-add-repository --yes --update ppa:ansible/ansible
           sudo apt-get install -y ansible
           
-    - name: Set secrets as environment variables
-      env:
-         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
     - name: Execute Ansible playbook
       run: |
@@ -56,4 +53,4 @@ jobs:
           ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini ./Ansible/install_java.yml -u gcp --private-key key.pem -vvv
       env:
           SSH_PVT_KEY: ${{ secrets.SSH_PVT_KEY }}
-          #GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
