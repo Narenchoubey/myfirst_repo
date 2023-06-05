@@ -43,6 +43,8 @@
 
     - name: Copy file from Google Cloud Storage
       command: gsutil cp gs://testdownload12345/jre-8u371-linux-x64.rpm /tmp/
+      environment:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
     #- name: Display secret value
     #  debug:
