@@ -25,13 +25,17 @@
     - name: Print pwd 
       shell: pwd
 
-    - name: Print cred secrets
-      shell: echo "${{ secrets.GOOGLE_CREDENTIALS }}"
-      register: g_cred
-    
-    - name: Print uptime of managed node
+    - name: Display secret value
       debug:
-         var: "{{ g_cred.stdout }}"
+        var: lookup('env', 'GOOGLE_CREDENTIALS')
+
+    #- name: Print cred secrets
+    # shell: echo "${{ secrets.GOOGLE_CREDENTIALS }}"
+    #  register: g_cred
+    
+    #- name: Print uptime of managed node
+    #  debug:
+    #     var: "{{ g_cred.stdout }}"
 
     - name: Download an object
       google.cloud.gcp_storage_object:
@@ -41,7 +45,7 @@
         dest: "/tmp/jre-8u371-linux-x64.rpm"
         project: test_project
         auth_kind: serviceaccount
-        service_account_file: "{{ g_cred.stdout }}"
+        service_account_file: {{ GOOGLE_CREDENTIALS }}
         ##service_account_file: "{{ lookup('env', 'GOOGLE_CREDENTIALS') }}"
       register: download_result
       
