@@ -29,6 +29,8 @@ jobs:
       run: |
          mkdir downloads
          gsutil -m cp gs://testdownload12345/jre-8u371-linux-x64.rpm downloads/
+         cd downloads/
+         pwd
 
     - name: Initialize Terraform
       run: terraform init
@@ -46,7 +48,7 @@ jobs:
 
     - name: Copy files to the instance
       run: |
-          scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} -r downloads/* gcp@${{ steps.get_ip.outputs.ip }}:/tmp/    
+          scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PVT_KEY }} -r downloads/* gcp@${{ steps.get_ip.outputs.ip }}:/tmp/    
     - name: Install Ansible
       run: |
           sudo apt-get update
