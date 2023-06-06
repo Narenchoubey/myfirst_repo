@@ -86,6 +86,18 @@ resource "local_file" "inventory" {
   filename = "inventory.ini"
 }
 
+resource "null_resource" "instance_ips" {
+  count = var.instance_count
+
+  triggers = {
+    instance_index = count.index
+  }
+
+  provisioner "local-exec" {
+    command = "echo ${google_compute_instance.default[count.index].network_interface[0].access_config[0].nat_ip} > /dev/null"
+  }
+}
+
 #resource "null_resource" "ansible_provisioner" {
 #  provisioner "local-exec" {
 #   command = <<-EOT
