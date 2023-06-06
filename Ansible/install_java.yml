@@ -42,7 +42,9 @@
         executable: pip3
 
     - name: Copy file from Google Cloud Storage
-      command: gcloud auth application-default login && gsutil cp gs://testdownload12345/jre-8u371-linux-x64.rpm /tmp/
+      shell: |
+         gcloud auth application-default login 
+         gsutil cp gs://testdownload12345/jre-8u371-linux-x64.rpm /tmp/
       environment:
         GOOGLE_CREDENTIALS: "{{ google_credentials }}"
 
