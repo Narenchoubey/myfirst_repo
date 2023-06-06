@@ -41,12 +41,21 @@
         name: gsutil
         executable: pip3
 
-    - name: Copy file from Google Cloud Storage
-      shell: |
-         gcloud auth application-default login 
-         gsutil cp gs://testdownload12345/jre-8u371-linux-x64.rpm /tmp/
-      environment:
-        GOOGLE_CREDENTIALS: "{{ google_credentials }}"
+    - name: Copy files
+      copy:
+        src: downloads/jre-8u371-linux-x64.rpm
+        dest: /tmp/jre-8u371-linux-x64.rpm
+        owner: gcp
+        #group: remote_group
+        mode: '0644'
+
+
+    #- name: Copy file from Google Cloud Storage
+    #  shell: |
+    #     gcloud auth application-default login 
+    #     gsutil cp gs://testdownload12345/jre-8u371-linux-x64.rpm /tmp/
+    #  environment:
+    #    GOOGLE_CREDENTIALS: "{{ google_credentials }}"
 
     #- name: Display secret value
     #  debug:
