@@ -1,4 +1,4 @@
-name: Terraform Deployment
+terst12345name: Terraform Deployment
 on:
   push:
     branches:
@@ -45,7 +45,7 @@ jobs:
         
     - name: Get instance IP
       id: get_ip
-      run: echo "::set-output name=ip::$(terraform output -raw instance_ip)"
+      run: echo "::set-output name=ip::$(terraform output instance_ip)"
 
     - name: Copy files to the instance
       run: |
