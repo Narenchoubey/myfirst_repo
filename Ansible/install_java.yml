@@ -41,13 +41,6 @@
         name: gsutil
         executable: pip3
 
-    - name: Copy files
-      copy:
-        src: downloads/jre-8u371-linux-x64.rpm
-        dest: /tmp/jre-8u371-linux-x64.rpm
-        owner: gcp
-        #group: remote_group
-        mode: '0644'
 
 
     #- name: Copy file from Google Cloud Storage
