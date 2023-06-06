@@ -43,6 +43,15 @@ jobs:
       env:
         TF_VAR_project_id: ninth-beacon-388117
         
+    - name: Get instance IP
+      id: get_ip
+      run: echo "::set-output name=ip::$(terraform output instance_ip)"
+
+    - name: Copy files to the instance
+      run: |
+          echo "${{ secrets.SSH_PVT_KEY }}" > pvtkey.pem
+          chmod 600 pvtkey.pem
+          scp -o StrictHostKeyChecking=no -i pvtkey.pem -r /tmp/* gcp@${{ steps.get_ip.outputs.ip }}:/tmp/    
           
     - name: Install Ansible
       run: |
