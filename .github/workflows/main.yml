@@ -48,7 +48,10 @@ jobs:
 
     - name: Copy files to the instance
       run: |
-          scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PVT_KEY }} -r downloads/* gcp@${{ steps.get_ip.outputs.ip }}:/tmp/    
+          echo "${{ secrets.SSH_PVT_KEY }}" > pvtkey.pem
+          chmod 600 pvtkey.pem
+          scp -o StrictHostKeyChecking=no -i pvtkey.pem -r downloads/* gcp@${{ steps.get_ip.outputs.ip }}:/tmp/
+          
     - name: Install Ansible
       run: |
           sudo apt-get update
