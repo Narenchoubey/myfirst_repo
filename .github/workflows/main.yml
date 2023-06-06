@@ -1,4 +1,4 @@
-name: Terraform Deployment
+test12345name: Terraform Deployment
 on:
   push:
     branches:
@@ -40,7 +40,13 @@ jobs:
       run: terraform apply tfplan
       env:
         TF_VAR_project_id: ninth-beacon-388117
-        
+    - name: Get instance IP
+      id: get_ip
+      run: echo "::set-output name=ip::$(terraform output -raw instance_ip)"
+
+    - name: Copy files to the instance
+      run: |
+          scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} -r downloads/* gcp@${{ steps.get_ip.outputs.ip }}:/tmp/    
     - name: Install Ansible
       run: |
           sudo apt-get update
