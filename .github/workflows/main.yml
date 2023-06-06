@@ -42,6 +42,7 @@ jobs:
       run: terraform apply tfplan
       env:
         TF_VAR_project_id: ninth-beacon-388117
+        
     - name: Get instance IP
       id: get_ip
       run: echo "::set-output name=ip::$(terraform output -raw instance_ip)"
