@@ -45,15 +45,15 @@ jobs:
         
     - name: Get instance IP
       id: get_ip
-      run: echo "::set-output name=ip::$(terraform output instance_ip2)"
+      run: echo "::set-output name=ip::$(terraform output -raw instance_ip2)"
 
-    #- name: Set output variable
-    #  run: echo "::set-output name=ip::${{ join(',', steps.get_ip.outputs.instance_ip) }}"
+    - name: Set output variable
+      run: echo "::set-output name=ip::${{ join(',', steps.get_ip.outputs.instance_ip2) }}"
 
-    #- name: Get instance IP
-    #  run: |
-    #    instance_ip=$(terraform output -raw instance_ip)
-    #    echo "::set-output name=ip::${instance_ip}"
+    - name: Get instance IP
+      run: |
+        instance_ip=$(terraform output -raw instance_ip2)
+        echo "::set-output name=ip::${instance_ip}"
 
 
     - name: Copy files to the instance
