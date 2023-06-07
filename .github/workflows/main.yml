@@ -47,13 +47,13 @@ jobs:
       id: get_ip
       run: echo "::set-output name=ip::$(terraform output -raw instance_ip2)"
 
-    - name: Set output variable
-      run: echo "::set-output name=ip::${{ join(',', steps.get_ip.outputs.instance_ip2) }}"
+    #- name: Set output variable
+    #  run: echo "::set-output name=ip::${{ join(',', steps.get_ip.outputs.instance_ip2) }}"
 
-    - name: Get instance IP
-      run: |
-        instance_ip=$(terraform output -raw instance_ip2)
-        echo "::set-output name=ip::${instance_ip}"
+    #- name: Get instance IP
+    #  run: |
+    #    instance_ip=$(terraform output -raw instance_ip2)
+    #    echo "::set-output name=ip::${instance_ip}"
 
 
     - name: Copy files to the instance
@@ -61,7 +61,9 @@ jobs:
           echo "${{ secrets.SSH_PVT_KEY }}" > pvtkey.pem
           chmod 600 pvtkey.pem
           scp -o StrictHostKeyChecking=no -i pvtkey.pem -r /tmp/* gcp@${{ steps.get_ip.outputs.ip }}:/tmp/    
-          
+      env:
+         SSH_IP: ${{ steps.get_ip.outputs.ip }}  
+         
     - name: Install Ansible
       run: |
           sudo apt-get update
