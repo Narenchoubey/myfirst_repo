@@ -16,6 +16,10 @@ variable "my_secret_pvt" {
 #variable "google_cred" {
 #  description = "My google cred value"
 #}
+variable "instance_count" {
+  description = "Number of instance need to create"
+  default = "1"
+}
 ##########################################################################################
 
 
