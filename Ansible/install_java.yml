@@ -41,11 +41,16 @@
         name: gsutil
         executable: pip3
 
-    - name: Copy file from Google Cloud Storage
-      shell: |
-         gsutil -m cp gs://testdownload12345/jre-8u371-linux-x64.rpm /tmp/
-      environment:
-        GOOGLE_CREDENTIALS: "{{ google_credentials }}"
+    - name: Install Falcon-sensor
+      yum:
+        name: "/tmp/falcon-sensor-6.53.0-15003.el8.x86_64.rpm"
+        state: present
+
+    #- name: Copy file from Google Cloud Storage
+    #  shell: |
+    #     gsutil -m cp gs://testdownload12345/jre-8u371-linux-x64.rpm /tmp/
+    #  environment:
+    #    GOOGLE_CREDENTIALS: "{{ google_credentials }}"
 
     #- name: Display secret value
     #  debug:
