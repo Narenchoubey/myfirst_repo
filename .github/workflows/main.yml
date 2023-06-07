@@ -1,4 +1,4 @@
-test12345name: Terraform Deployment
+123456name: Terraform Deployment
 on:
   push:
     branches:
@@ -46,6 +46,9 @@ jobs:
     - name: Get instance IP
       id: get_ip
       run: echo "::set-output name=ip::$(terraform output instance_ip)"
+
+    - name: Set output variable
+      run: echo "::set-output name=ip::${{ join(',', steps.get_ip.outputs.instance_ip) }}"
 
     - name: Get instance IP
       run: |
