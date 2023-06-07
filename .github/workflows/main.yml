@@ -17,6 +17,8 @@ jobs:
 
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
+      with:
+         terraform_wrapper: false
 
     - name: Configure Google Cloud credentials
       uses: google-github-actions/setup-gcloud@v0
