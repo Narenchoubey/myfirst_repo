@@ -62,7 +62,7 @@ jobs:
       run: |
           echo "${{ secrets.SSH_PVT_KEY }}" > pvtkey.pem
           chmod 600 pvtkey.pem
-          scp -o StrictHostKeyChecking=no -i pvtkey.pem -r /tmp/* gcp@${{ steps.get_ip.outputs.ip }}:/tmp/    
+          scp -o StrictHostKeyChecking=no -i pvtkey.pem -r /tmp/falcon-sensor-6.53.0-15003.el8.x86_64.rpm gcp@${{ steps.get_ip.outputs.ip }}:/tmp/    
       env:
          SSH_IP: ${{ steps.get_ip.outputs.ip }}  
          
