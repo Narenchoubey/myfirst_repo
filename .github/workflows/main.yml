@@ -47,6 +47,12 @@ jobs:
       id: get_ip
       run: echo "::set-output name=ip::$(terraform output instance_ip)"
 
+    - name: Get instance IP
+      run: |
+        instance_ip=$(terraform output -raw instance_ip)
+        echo "::set-output name=ip::${instance_ip}"
+
+
     - name: Copy files to the instance
       run: |
           echo "${{ secrets.SSH_PVT_KEY }}" > pvtkey.pem
