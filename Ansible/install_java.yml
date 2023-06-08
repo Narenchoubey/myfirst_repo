@@ -40,11 +40,30 @@
       pip:
         name: gsutil
         executable: pip3
+        
+    - name: Copy a file Nexus
+      ansible.builtin.copy:
+        src: ./NessusAgent-10.4.0-es8.x86_64.rpm
+        dest: /tmp/NessusAgent-10.4.0-es8.x86_64.rpm
+        mode: '0644'
+    
+    - name: Update packages
+      yum:
+        name: '*'
+        state: latest
 
     - name: Install Falcon-sensor
       yum:
         name: "/tmp/falcon-sensor-6.53.0-15003.el8.x86_64.rpm"
         state: present
+        disable_gpg_check: yes
+        
+       
+    - name: Install Falcon-sensor
+      yum:
+        name: "/tmp/NessusAgent-10.4.0-es8.x86_64.rpm"
+        state: present
+        disable_gpg_check: yes
 
     #- name: Copy file from Google Cloud Storage
     #  shell: |
