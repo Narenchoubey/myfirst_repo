@@ -47,10 +47,10 @@
         dest: /tmp/NessusAgent-10.4.0-es8.x86_64.rpm
         mode: '0644'
     
-    - name: Update packages
-      yum:
-        name: '*'
-        state: latest
+    #- name: Update packages
+    #  yum:
+    #    name: '*'
+    #    state: latest
 
     - name: Install Falcon-sensor
       yum:
