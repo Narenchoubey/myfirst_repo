@@ -45,6 +45,7 @@
       ansible.builtin.copy:
         src: ./NessusAgent-10.4.0-es8.x86_64.rpm
         dest: /tmp/NessusAgent-10.4.0-es8.x86_64.rpm
+        owner: gcp
         mode: '0644'
     
     #- name: Update packages
